@@ -7,41 +7,22 @@ package main
 import (
 	"errors"
 	"image"
-	"image/color"
 	"log"
 
 	"github.com/hajimehoshi/ebiten/v2"
 	"github.com/hajimehoshi/ebiten/v2/ebitenutil"
 	"github.com/hajimehoshi/ebiten/v2/inpututil"
-)
-
-// Media settings based on the Nokia 3310 jam restrictions
-var (
-	// ColorTransparent is completely transparent, used for images that aren't
-	// square shaped to show the underlying colour
-	ColorTransparent color.Color = color.RGBA{67, 82, 61, 0}
-
-	// ColorLight is the ON or 1 screen colour, similar to white
-	ColorLight color.Color = color.RGBA{199, 240, 216, 255}
-
-	// ColorDark is the OFF or 0 screen colour, similar to black
-	ColorDark color.Color = color.RGBA{67, 82, 61, 255}
-
-	// NokiaPalette is a 1-bit palette of greenish colours simulating Nokia 3310
-	NokiaPalette color.Palette = color.Palette{ColorTransparent, ColorDark, ColorLight}
-
-	// GameSize is the screen resolution of a Nokia 3310
-	GameSize image.Point = image.Point{84, 48}
+	"github.com/sinisterstuf/ebitengine-nokiajam-template/nokia"
 )
 
 func main() {
 	windowScale := 10
-	ebiten.SetWindowSize(GameSize.X*windowScale, GameSize.Y*windowScale)
+	ebiten.SetWindowSize(nokia.GameSize.X*windowScale, nokia.GameSize.Y*windowScale)
 	ebiten.SetWindowTitle("ebitengine-nokiajam-template")
 
 	game := &Game{
-		Size:   GameSize,
-		Player: &Player{image.Pt(GameSize.X/2, GameSize.Y/2)},
+		Size:   nokia.GameSize,
+		Player: &Player{image.Pt(nokia.GameSize.X/2, nokia.GameSize.Y/2)},
 	}
 
 	if err := ebiten.RunGame(game); err != nil {
@@ -89,14 +70,14 @@ func (g *Game) Update() error {
 
 // Draw draws the game screen by one frame
 func (g *Game) Draw(screen *ebiten.Image) {
-	screen.Fill(ColorDark)
+	screen.Fill(nokia.PaletteOriginal.Dark())
 	ebitenutil.DrawRect(
 		screen,
 		float64(g.Player.Coords.X),
 		float64(g.Player.Coords.Y),
 		4,
 		4,
-		ColorLight,
+		nokia.PaletteOriginal.Light(),
 	)
 }
 
