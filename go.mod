@@ -1,4 +1,4 @@
-module github.com/sinisterstuf/ebitengine-game-template
+module github.com/sinisterstuf/ebitengine-nokiajam-template
 
 go 1.19
 

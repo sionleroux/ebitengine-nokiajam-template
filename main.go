@@ -37,7 +37,7 @@ var (
 func main() {
 	windowScale := 10
 	ebiten.SetWindowSize(GameSize.X*windowScale, GameSize.Y*windowScale)
-	ebiten.SetWindowTitle("ebitengine-game-template")
+	ebiten.SetWindowTitle("ebitengine-nokiajam-template")
 
 	game := &Game{
 		Size:   GameSize,
